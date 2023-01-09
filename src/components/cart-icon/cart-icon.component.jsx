@@ -8,15 +8,13 @@ import './cart-icon.style.scss';
 const CartIcon = () => {
     const { isDropdownOpen , setDropdown } = useContext(DropdownContext);
 
-    const dropdownHandler = () => {
-        if(!isDropdownOpen) return setDropdown(true);
-        if(isDropdownOpen) return setDropdown(false);
-    }
+    // The way of doing the toggle! (!false -> true)  (!true -> false) 
+    const dropdownHandler = () => setDropdown(!isDropdownOpen);
 
     return (
-        <div className='cart-icon-container'>
-            <ShoppingIcon className='shopping-icon' onClick={dropdownHandler}/>
-            <span className='item-count' onClick={dropdownHandler}>10</span>
+        <div className='cart-icon-container' onClick={dropdownHandler}>
+            <ShoppingIcon className='shopping-icon' />
+            <span className='item-count'>10</span>
         </div>
     )
 }

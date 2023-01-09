@@ -1,8 +1,8 @@
-import { createContext, useState, useContext } from "react";
+import { createContext, useState} from "react";
 
 export const DropdownContext = createContext({
     isDropdownOpen: false,
-    setDropdown: () => false
+    setDropdown: () => {}
 });
 
 export const DropdownProvider = ({children}) => {

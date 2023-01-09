@@ -39,9 +39,7 @@ const Navigation = () => {
                 }
                 <CartIcon/>
             </div>
-            {
-                isDropdownOpen ? <CartDropdown/> : ''
-            }
+            { isDropdownOpen && <CartDropdown/> }
         </div>
         <Outlet/>
       </Fragment>
