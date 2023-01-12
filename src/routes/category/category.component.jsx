@@ -1,13 +1,16 @@
 import { useContext, useState, useEffect, Fragment } from 'react';
 import { useParams } from 'react-router-dom';
 
-import './category.style.scss';
+import './category.style.jsx';
 
 import ProductCard from '../../components/product-card/product-card.component';
 
 import { CategoriesContext } from '../../contexts/categories.context';
 
-import './category.style.scss'
+import {
+    CategoryTitleCss,
+    CategoryContainerCss,
+} from './category.style.jsx'
 
 const Category = () => {
     const {category} = useParams();
@@ -20,12 +23,12 @@ const Category = () => {
 
     return (
         <Fragment>
-            <h2 className='category-container-title'>{category}</h2>
-            <div className='category-container'>
+            <CategoryTitleCss>{category}</CategoryTitleCss>
+            <CategoryContainerCss>
                 {products && products.map(product =>
                     <ProductCard product={product} key={product.id}/> )
                 }
-            </div>
+            </CategoryContainerCss>
         </Fragment>
     )
 }

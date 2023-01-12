@@ -3,34 +3,40 @@ import { DropdownContext } from '../../contexts/dropdown.context';
 
 import CheckoutCard from "../../components/checkout-card/checkout-card.component";
 
-import './checkout.style.scss';
+import {
+    CheckoutContainerCss,
+    CheckoutHeaderCss,
+    HeaderBlockCss,
+    HeaderBlockLastCss,
+    TotalCss
+} from './checkout.style.jsx';
 
 
 const Checkout = () => {
     const {cartItems, cartTotalPrice} = useContext(DropdownContext)
 
     return (
-        <div className='checkout-container'>
-            <div className='checkout-header'>
-                <div className='header-block'>
+        <CheckoutContainerCss>
+            <CheckoutHeaderCss>
+                <HeaderBlockCss>
                     <span>Product</span>
-                </div>
-                <div className='header-block'>
+                </HeaderBlockCss>
+                <HeaderBlockCss>
                     <span>Description</span>
-                </div>
-                <div className='header-block'>
+                </HeaderBlockCss>
+                <HeaderBlockCss>
                     <span>Quantity</span>
-                </div>
-                <div className='header-block'>
+                </HeaderBlockCss>
+                <HeaderBlockCss>
                     <span>Price</span>
-                </div>
-                <div className='header-block'>
+                </HeaderBlockCss>
+                <HeaderBlockLastCss>
                     <span>Remove</span>
-                </div>
-            </div>
+                </HeaderBlockLastCss>
+            </CheckoutHeaderCss>
             {cartItems.map(el => <CheckoutCard cartItem={el} key={el.id}/>)}
-            <span className='total'>TOTAL: ${cartTotalPrice}</span>
-        </div>
+            <TotalCss className='total'>TOTAL: ${cartTotalPrice}</TotalCss>
+        </CheckoutContainerCss>
     )
 }
 

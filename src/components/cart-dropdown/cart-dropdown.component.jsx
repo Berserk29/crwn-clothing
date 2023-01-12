@@ -7,7 +7,11 @@ import Button from '../button/button.component';
 
 import CartItem from '../cart-item/cart-item.component';
 
-import './cart-dropdown.style.scss';
+import {
+    CartDropdownContainerCss,
+    CartItemsCss,
+    EmptyMessageCss,
+} from './cart-dropdown.style.jsx';
 
 const CartDropdown = () => {
     const {cartItems, isDropdownOpen, setDropdown} = useContext(DropdownContext);
@@ -15,17 +19,21 @@ const CartDropdown = () => {
 
     const goToCheckoutHandle = () => {
         navigate('/checkout')
-        // Close the dropdown menu after clicking!
+        // Close the dropdown menu after clicking Checkout
         setDropdown(!isDropdownOpen)  
     }
 
     return(
-        <div className='cart-dropdown-container'>
-            <div className='cart-items'>
-                {cartItems.map(el => <CartItem cartItem={el} key={el.id}/>)}
-            </div>
+        <CartDropdownContainerCss>
+            <CartItemsCss>
+                {
+                cartItems.length ? (cartItems.map(el =>
+                <CartItem cartItem={el} key={el.id}/>)) :
+                ( <EmptyMessageCss>Your cart is empty</EmptyMessageCss> )
+                }
+            </CartItemsCss>
             <Button onClick={goToCheckoutHandle}>CHECKOUT</Button>
-        </div>
+        </CartDropdownContainerCss>
     )
 }
 
