@@ -1,6 +1,7 @@
-import { useContext } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
-import { DropdownContext } from '../../contexts/dropdown.context';
+import { setDropdown } from '../../store/cart/cart.action';
+import { selectCartCount, selectIsCartOpen } from '../../store/cart/cart.selector';
 
 import {
     CartIconContainerCss,
@@ -9,10 +10,13 @@ import {
 } from './cart-icon.style.jsx';
 
 const CartIcon = () => {
-    const { isDropdownOpen , setDropdown , cartItemsCount } = useContext(DropdownContext);
+    const dispatch = useDispatch();
+
+    const isDropdownOpen = useSelector(selectIsCartOpen)
+    const cartItemsCount = useSelector(selectCartCount)
 
     // The way of doing the toggle! (!false -> true)  (!true -> false) 
-    const dropdownHandler = () => setDropdown(!isDropdownOpen);
+    const dropdownHandler = () => dispatch(setDropdown(!isDropdownOpen));
     
 
     return (

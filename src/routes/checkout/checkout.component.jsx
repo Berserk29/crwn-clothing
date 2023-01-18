@@ -1,5 +1,5 @@
-import { useContext } from 'react';
-import { DropdownContext } from '../../contexts/dropdown.context';
+import { useSelector } from "react-redux";
+import { selectCartItems, selectCartTotal} from "../../store/cart/cart.selector";
 
 import CheckoutCard from "../../components/checkout-card/checkout-card.component";
 
@@ -13,7 +13,8 @@ import {
 
 
 const Checkout = () => {
-    const {cartItems, cartTotalPrice} = useContext(DropdownContext)
+    const cartItems = useSelector(selectCartItems);
+    const cartTotalPrice = useSelector(selectCartTotal);
 
     return (
         <CheckoutContainerCss>

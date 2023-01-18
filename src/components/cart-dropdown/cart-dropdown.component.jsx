@@ -1,7 +1,8 @@
-import { useContext } from 'react';
+import { useSelector, useDispatch  } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-import { DropdownContext } from '../../contexts/dropdown.context';
+import { setDropdown } from '../../store/cart/cart.action';
+import { selectCartItems, selectIsCartOpen } from '../../store/cart/cart.selector';
 
 import Button from '../button/button.component';
 
@@ -14,13 +15,16 @@ import {
 } from './cart-dropdown.style.jsx';
 
 const CartDropdown = () => {
-    const {cartItems, isDropdownOpen, setDropdown} = useContext(DropdownContext);
+    const dispatch = useDispatch();
     const navigate = useNavigate();
+
+    const isDropdownOpen = useSelector(selectIsCartOpen);
+    const cartItems = useSelector(selectCartItems);
 
     const goToCheckoutHandle = () => {
         navigate('/checkout')
         // Close the dropdown menu after clicking Checkout
-        setDropdown(!isDropdownOpen)  
+        dispatch(setDropdown(!isDropdownOpen))  
     }
 
     return(
