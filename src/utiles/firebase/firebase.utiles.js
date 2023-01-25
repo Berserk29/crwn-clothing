@@ -40,6 +40,7 @@ googleProvider.setCustomParameters({
 });
 
 export const auth = getAuth();
+
 export const signInWithGooglePopup = () => {
   return signInWithPopup(auth, googleProvider);  
 };
@@ -72,7 +73,7 @@ export const getCategoriesAndDocuments = async () => {
   return querySnapshot.docs.map(docSnapshot => docSnapshot.data())
 };
 
-export const createUserDocumentFromAuth = async (userAuth, additionalInformation = {}) => {
+export const createUserDocumentFromAuth = async (userAuth, additionalDetails = {}) => {
   if(!userAuth) return;
 
   const userDocRef = doc(db, 'users', userAuth.uid);
@@ -88,7 +89,7 @@ export const createUserDocumentFromAuth = async (userAuth, additionalInformation
         displayName,
         email,
         createdAt,
-        ...additionalInformation,
+        ...additionalDetails,
       })
 
     } catch(error) {
@@ -96,7 +97,7 @@ export const createUserDocumentFromAuth = async (userAuth, additionalInformation
     }
   };
 
-  return userDocRef;
+  return userSnapshot;
 };
 
 export const createAuthUserWithEmailAndPassword = async (email, password) => {
@@ -117,3 +118,17 @@ export const onAuthStateChangedListener = (callback) => {
   // if(!callback) return;
   onAuthStateChanged(auth, callback); 
 }
+
+export const getCurrentUser = () => {
+
+  return new Promise((resolve, reject) => {
+    const unsubscribe = onAuthStateChanged(
+      auth,
+      (userAuth) => {
+        unsubscribe();
+        resolve(userAuth);
+      },
+      reject
+    )
+  })
+};
