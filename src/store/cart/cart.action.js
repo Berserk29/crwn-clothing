@@ -1,4 +1,4 @@
-import { setDropdownOpen, setCartItems } from "./cart.reducer";
+import { setDropdownOpen, setCartItems, setCartEmpty } from "./cart.reducer";
 
 
 // HELPER FUNCTION
@@ -36,6 +36,10 @@ cartItems.filter((cartItem) => cartItem.id !== productToRemove.id )
 export const setDropdown = (bool) => {
     return setDropdownOpen(bool)
 };
+
+export const setCartEmptyAction = () => {
+    return setCartEmpty()
+}
 
 export const addItemToCart = (cartItems, productToAdd) => {
     const newCartItems = addCartItem(cartItems, productToAdd);

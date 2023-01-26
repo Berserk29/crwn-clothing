@@ -23,3 +23,4 @@ export const selectCartTotal = createSelector(
     (cartItems) => cartItems.reduce
     ((acc, curEl) => acc + (curEl.quantity * curEl.price), 0)
 );
+

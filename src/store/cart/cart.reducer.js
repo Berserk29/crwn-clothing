@@ -14,9 +14,12 @@ export const cartSlice = createSlice({
         },
         setCartItems: (state, action) => {
             state.cartItems = action.payload;
+        },
+        setCartEmpty: (state) => {
+            state.cartItems = [];
         }
     }
 });
 
-export const {setDropdownOpen, setCartItems} = cartSlice.actions;
+export const {setDropdownOpen, setCartItems, setCartEmpty} = cartSlice.actions;
 export default cartSlice.reducer;
